@@ -1,3 +1,7 @@
+<%# /entriesへアクセスされた際に表示するhtmlを生成するテンプレート %>
+<%# @entriesのデータを一覧で表示する %>
+
+<%# Create, Update, Delete完了時の通知を表示する %>
 <p id="notice"><%= notice %></p>
 
 <h1>Entries</h1>
@@ -12,12 +16,16 @@
   </thead>
 
   <tbody>
+    <%# @entriesをeachで回し、個々のデータをテーブルの１行として表示している %>
     <% @entries.each do |entry| %>
       <tr>
         <td><%= entry.title %></td>
         <td><%= entry.body %></td>
+        <%# showへのリンク %>
         <td><%= link_to 'Show', entry %></td>
+        <%# editへのリンク %>
         <td><%= link_to 'Edit', edit_entry_path(entry) %></td>
+        <%# destroyへのリンク %>
         <td><%= link_to 'Destroy', entry, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
@@ -25,5 +33,5 @@
 </table>
 
 <br>
-
+<%# newへのリンク %>
 <%= link_to 'New Entry', new_entry_path %>

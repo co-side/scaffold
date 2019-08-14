@@ -1,4 +1,8 @@
+<%# /entries/newもしくは/entries/:id/editへアクセスされた際に利用する部分テンプレート %>
+
+<%# entryモデルのフォームを生成するヘルパーメソッド %>
 <%= form_with(model: entry, local: true) do |form| %>
+  <%# 変数entryがerrorsを持っている場合はvalidationエラーの内容を表示する %>
   <% if entry.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(entry.errors.count, "error") %> prohibited this entry from being saved:</h2>

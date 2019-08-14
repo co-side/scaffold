@@ -1,5 +1,9 @@
+<%# /entries/newへアクセスされた際に表示するhtmlを生成するテンプレート %>
+
 <h1>New Entry</h1>
 
+<%# フォームの中身は部分テンプレートの_formに記述する %>
 <%= render 'form', entry: @entry %>
 
+<%# indexへのリンク %>
 <%= link_to 'Back', entries_path %>
