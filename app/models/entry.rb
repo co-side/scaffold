@@ -4,4 +4,5 @@
 # ActiveRecordを使うことでSQLを意識せずにデータベースとのやり取りが可能となる
 
 class Entry < ApplicationRecord
+  has_many :comments
 end
