@@ -10,7 +10,7 @@ Rails.application.routes.draw do
   #           PUT    /entries/:id(.:format)            entries#update
   #           DELETE /entries/:id(.:format)            entries#destroy
   resources :blogs do
-    resources :entries, except: {:index}
+    resources :entries, except: [:index]
   end
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end
