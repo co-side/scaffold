@@ -1,8 +1,9 @@
-%h1 Listing blogs
+%h2 Listing blogs
 
-%table
+%table.table
   %thead
     %tr
+      %th Title
       %th
       %th
       %th
@@ -10,6 +11,7 @@
   %tbody
     - @blogs.each do |blog|
       %tr
+        %td= blog.title
         %td= link_to 'Show', blog
         %td= link_to 'Edit', edit_blog_path(blog)
         %td= link_to 'Destroy', blog, method: :delete, data: { confirm: 'Are you sure?' }
