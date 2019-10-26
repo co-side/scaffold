@@ -10,5 +10,3 @@ import 'bootstrap'
 import '../src/application.scss'
 import Rails from 'rails-ujs'
 Rails.start();
-
-console.log('Hello World from Webpacker')
