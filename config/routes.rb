@@ -10,7 +10,13 @@ Rails.application.routes.draw do
   #           PUT    /entries/:id(.:format)            entries#update
   #           DELETE /entries/:id(.:format)            entries#destroy
   resources :blogs do
-    resources :entries, except: [:index]
+    resources :entries, except: [:index] do
+      resources :comments, only: [:create, :destroy] do
+        member do
+          patch :approve
+        end
+      end
+    end
   end
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end
