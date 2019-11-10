@@ -32,12 +32,12 @@ class CommentsController < ApplicationController
     end
 
     def set_entry
-      @entry = Entry.find(params[:entry_id])
+      @entry = Entry.where(blog_id: params[:blog_id]).find(params[:entry_id])
     end
 
     def set_comment
       set_entry
-      @comment = @entry.comments.find(params[:id])
+      @comment = Comment.where(entry_id: params[:entry_id]).find(params[:id])
     end
 
     def comment_params
