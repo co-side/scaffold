@@ -4,8 +4,8 @@
 class EntriesController < ApplicationController
   # コントローラー内のアクションの実行前に実行するメソッドを宣言している
   # set_entryメソッドをshow, edit, update, destroyアクションの前に実行する
-  before_action :set_entry, only: [:show, :edit, :update, :destroy]
   before_action :set_blog
+  before_action :set_entry, only: [:show, :edit, :update, :destroy]
 
   # GET /entries/1
   # GET /entries/1.json
@@ -112,8 +112,7 @@ class EntriesController < ApplicationController
     def set_entry
       # Entriesテーブルの検索処理
       # URLパラメータのidに入っている値と同じ値のidを持つレコードを取得して、インスタンス変数@entryに代入
-      set_blog
-      @entry = @blog.entries.find(params[:id])
+      @entry = Entry.where(blog_id: params[:blog_id]).find(params[:id])
     end
 
     def set_blog
