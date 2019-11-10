@@ -7,16 +7,6 @@ class EntriesController < ApplicationController
   before_action :set_entry, only: [:show, :edit, :update, :destroy]
   before_action :set_blog
 
-  # GET /entries
-  # GET /entries.json
-  # indexアクションはテーブルに登録されているデータの一覧表示と、CRUDの起点としての役割を持つ
-  def index
-    # Entriesテーブルのすべてのレコードを取得してインスタンス変数@entriesに代入
-    # コントローラーのアクションで作成したインスタンス変数はview側でも呼び出すことが可能
-    # @entriesという変数名は複数のレコードを持っていることを示すため複数形になっている
-    @entries = Entry.all
-  end
-
   # GET /entries/1
   # GET /entries/1.json
   # CRUDのReadを担うアクション
