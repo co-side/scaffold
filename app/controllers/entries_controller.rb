@@ -5,6 +5,7 @@ class EntriesController < ApplicationController
   # コントローラー内のアクションの実行前に実行するメソッドを宣言している
   # set_entryメソッドをshow, edit, update, destroyアクションの前に実行する
   before_action :set_entry, only: [:show, :edit, :update, :destroy]
+  before_action :set_blog
 
   # GET /entries
   # GET /entries.json
@@ -22,6 +23,7 @@ class EntriesController < ApplicationController
   # URLパラメータのIDから該当する該当するエントリーを取得し、画面に表示する
   # 取得処理はset_entryで行うためメソッドは空になっている
   def show
+    @comment = Comment.new()
   end
 
   # GET /entries/new
@@ -29,7 +31,7 @@ class EntriesController < ApplicationController
   def new
     # Entryモデルのオブジェクトを生成
     # モデルはデータベースとやり取りを行うクラス
-    @entry = Entry.new
+    @entry = @blog.entries.build
   end
 
   # GET /entries/1/edit
@@ -44,7 +46,7 @@ class EntriesController < ApplicationController
   def create
     # ユーザーが入力した情報を引数としてEntryモデルのオブジェクトを生成
     # このときentry_paramsを指定することで不正なパラメータの入力を防いでいる
-    @entry = Entry.new(entry_params)
+    @entry = @blog.entries.build(entry_params)
 
     # ユーザーのリクエストに対して、このフォーマットのリクエストに対してはこういうレスポンスをする、と明示的に示す処理
     respond_to do |format|
@@ -57,14 +59,14 @@ class EntriesController < ApplicationController
         # entry_urlはヘルパーメソッドで、引数にモデルオブジェクトを渡すとそのオブジェクトのshow画面の絶対パスを生成する
         # notice 'Entry was successfully created.'でリダイレクト後に画面に表示するメッセージを宣言している
         # noticeはflashメッセージでリダイレクト時に一度だけ表示されるメッセージ
-        format.html { redirect_to @entry, notice: 'Entry was successfully created.' }
+        format.html { redirect_to [@blog, @entry], notice: 'Entry was successfully created.' }
         # json形式のリクエストに対してのレスポンス
         # renderメソッドで出力内容を指定している。
         # render :showでshowアクションのviewを出力するよう指定している。json形式であるためshow.jsonビューが出力される
         # status: :createdでレスポンスコード201を返すよう指定している
         # location: @entryでHTTPのLocationヘッダーを設定している。Locationヘッダーはリダイレクト先のURLを指定
         # @entryはでentry_url(@entry.id)の省略形
-        format.json { render :show, status: :created, location: entry_url(@entry.id) }
+        format.json { render :show, status: :created, location: [@blog, @entry] }
       else
         # html形式のリクエストに対してのレスポンス
         # レコードの作成に失敗した場合はnewアクションのviewを再度表示
@@ -87,8 +89,8 @@ class EntriesController < ApplicationController
       # 返り値は真偽値なので、それを用いて処理を分岐している
       if @entry.update(entry_params)
         # 成功したときはshowへリダイレクトする
-        format.html { redirect_to @entry, notice: 'Entry was successfully updated.' }
-        format.json { render :show, status: :ok, location: @entry }
+        format.html { redirect_to [@blog, @entry], notice: 'Entry was successfully updated.' }
+        format.json { render :show, status: :ok, location: [@blog, @entry] }
       else
         # 失敗したときはeditを再度表示する
         format.html { render :edit }
@@ -106,7 +108,7 @@ class EntriesController < ApplicationController
     @entry.destroy
     respond_to do |format|
       # html形式のリクエストの場合、index画面へリダイレクトする。
-      format.html { redirect_to entries_url, notice: 'Entry was successfully destroyed.' }
+      format.html { redirect_to @blog, notice: 'Entry was successfully destroyed.' }
       # json形式のリクエストの場合、本文のないレスポンスを送信している
       # headメソッドを使用することでヘッダだけで本文のないレスポンスを送信可能
       # no_contentはステータスコード204に相当する
@@ -120,7 +122,12 @@ class EntriesController < ApplicationController
     def set_entry
       # Entriesテーブルの検索処理
       # URLパラメータのidに入っている値と同じ値のidを持つレコードを取得して、インスタンス変数@entryに代入
-      @entry = Entry.find(params[:id])
+      set_blog
+      @entry = @blog.entries.find(params[:id])
+    end
+
+    def set_blog
+      @blog = Blog.find(params[:blog_id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

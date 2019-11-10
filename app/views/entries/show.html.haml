@@ -1,10 +1,32 @@
 %p#notice= notice
-%p
-  %strong Title:
-  = @entry.title
-%p
-  %strong Body:
-  = @entry.body
-= link_to 'Edit', edit_entry_path(@entry)
-|
-= link_to 'Back', entries_path
+
+%h2= @blog.title
+%h2= "Title: #{@entry.title}"
+%h2= "Body: #{@entry.body}"
+
+= link_to 'Edit', edit_blog_entry_path(@blog, @entry)
+\|
+= link_to 'Back', @blog
+
+%hr/
+
+%h2 Listing comments
+%table.table
+  %thead
+    %tr
+      %th Body
+      %th{:colspan => '2'}
+  %tbody
+    - @entry.comments.each do |comment|
+      %tr
+        %td= comment.approved_body
+        %td= link_to 'Approve', approve_blog_entry_comment_path(@blog, @entry, comment), method: :patch if comment.status == 'unapproved'
+        %td= link_to 'Destroy', blog_entry_comment_path(@blog, @entry, comment), method: :delete, data: { confirm: 'Are you sure?' }
+
+%h2 New comment
+= form_with(model: [@blog, @entry, @comment], local: true) do |form|
+  .form-group
+    = form.label :body
+    = form.text_area :body, class: 'form-control'
+  .form-group
+    = form.submit 'Save', class: 'btn btn-outline-primary'
