@@ -7,6 +7,7 @@ class CommentsController < ApplicationController
     @comment = @entry.comments.build(comment_params)
     respond_to do |format|
       if @entry.save
+        CommentMailer.send_when_create(@comment).deliver
         format.html { redirect_to [@blog, @entry], notice: 'Comment was successfully created.' }
       else
         format.html { render [@blog, @entry] }
