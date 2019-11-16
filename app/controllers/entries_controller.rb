@@ -2,6 +2,7 @@
 # MVCにおけるCに相当する
 # 基本的にコントローラの名前は複数形を使う
 class EntriesController < ApplicationController
+  before_action :authenticate_user!
   # コントローラー内のアクションの実行前に実行するメソッドを宣言している
   # set_entryメソッドをshow, edit, update, destroyアクションの前に実行する
   before_action :set_blog
