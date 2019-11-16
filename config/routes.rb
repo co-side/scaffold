@@ -1,5 +1,6 @@
 # ユーザーのURLアクセスをどのコントローラーのどのアクションで待ち受けるか設定するファイル
 Rails.application.routes.draw do
+  devise_for :users
   # resources :entriesで以下のルーティングを生成している
   # entries   GET    /entries(.:format)                entries#index
   #           POST   /entries(.:format)                entries#create
