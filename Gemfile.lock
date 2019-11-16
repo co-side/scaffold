@@ -194,6 +194,9 @@ GEM
       childprocess (>= 0.5, < 4.0)
       rubyzip (>= 1.2.2)
     sexp_processor (4.13.0)
+    simple_form (5.0.1)
+      actionpack (>= 5.0)
+      activemodel (>= 5.0)
     spring (2.1.0)
     spring-commands-rspec (1.0.4)
       spring (>= 0.9.1)
@@ -255,6 +258,7 @@ DEPENDENCIES
   rails (~> 5.2.3)
   rspec-rails (~> 3.7.0)
   sass-rails (~> 5.0)
+  simple_form
   spring
   spring-commands-rspec
   spring-watcher-listen (~> 2.0.0)
