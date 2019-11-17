@@ -125,6 +125,6 @@ class EntriesController < ApplicationController
       # POSTで受け取る値を制限して不正なパラメータの入力を防ぐ仕組み
       # requireでPOSTで受け取る値のキーを:entryに設定
       # permitで許容するカラムを:title, :bodyに設定
-      params.require(:entry).permit(:title, :body)
+      params.require(:entry).permit(:title, :body, :genre)
     end
 end

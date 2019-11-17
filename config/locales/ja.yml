@@ -1,0 +1,8 @@
+ja:
+  enumerize:
+    entry:
+      genre:
+        entertainment: エンタメ
+        sport: スポーツ
+        music: 音楽
+        game: ゲーム

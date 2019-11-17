@@ -4,6 +4,10 @@
 # ActiveRecordを使うことでSQLを意識せずにデータベースとのやり取りが可能となる
 
 class Entry < ApplicationRecord
+  extend Enumerize
+
   belongs_to :blog
   has_many :comments, dependent: :destroy
+
+  enumerize :genre, in: [:entertainment, :sport, :music, :game]
 end

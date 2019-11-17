@@ -32,5 +32,8 @@ module Scaffold
 
     # libフォルダの読み込み設定
     config.autoload_paths += %W(#{config.root}/lib)
+
+    # デフォルトのロケールを日本語に設定
+    config.i18n.default_locale = :ja
   end
 end
