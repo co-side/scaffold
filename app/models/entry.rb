@@ -10,4 +10,5 @@ class Entry < ApplicationRecord
   has_many :comments, dependent: :destroy
 
   enumerize :genre, in: [:entertainment, :sport, :music, :game]
+  validates :title, presence: true
 end
