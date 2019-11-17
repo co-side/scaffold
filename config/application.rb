@@ -34,6 +34,6 @@ module Scaffold
     config.autoload_paths += %W(#{config.root}/lib)
 
     # デフォルトのロケールを日本語に設定
-    config.i18n.default_locale = :ja
+    # config.i18n.default_locale = :ja
   end
 end
