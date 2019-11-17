@@ -1,5 +1,9 @@
 %h2 Listing blogs
 
+= search_form_for @q, :builder => SimpleForm::FormBuilder, wrapper: :inline_form, html: { class: "form-inline mb-3" } do |f|
+  = f.input :title_cont, label: false, placeholder: 'Title'
+  = f.button :submit, 'Search', class: 'btn btn-outline-primary'
+
 %table.table
   %thead
     %tr
