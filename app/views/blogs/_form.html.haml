@@ -1,13 +1,5 @@
-= form_for @blog do |f|
-  - if @blog.errors.any?
-    #error_explanation
-      %h2= "#{pluralize(@blog.errors.count, "error")} prohibited this blog from being saved:"
-      %ul
-        - @blog.errors.full_messages.each do |message|
-          %li= message
-
-  .form-group
-    = f.label :title
-    = f.text_field :title, class: 'form-control'
-  .form-group
-    = f.submit 'Save', class: 'btn btn-outline-primary'
+= simple_form_for @blog do |form|
+  = form.error_notification
+  = form.input :title
+  = form.input :logo, as: :file
+  = form.button :submit, class: 'btn btn-outline-primary'

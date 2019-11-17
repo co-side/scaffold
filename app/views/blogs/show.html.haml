@@ -3,6 +3,9 @@
 %h2
   Title:
   = @blog.title
+  %br/
+  Logo:
+  = image_tag @blog.logo.to_s, {style: 'width: 200px;'}
 
 = link_to 'Edit', edit_blog_path(@blog)
 \|

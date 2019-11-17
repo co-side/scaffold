@@ -3,6 +3,7 @@
 %table.table
   %thead
     %tr
+      %th Logo
       %th Title
       %th
       %th
@@ -11,6 +12,7 @@
   %tbody
     - @blogs.each do |blog|
       %tr
+        %td{style: 'width: 200px;'}= image_tag blog.logo.to_s, class: 'img-fluid'
         %td= blog.title
         %td= link_to 'Show', blog
         %td= link_to 'Edit', edit_blog_path(blog)
