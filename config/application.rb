@@ -29,5 +29,8 @@ module Scaffold
 
     # Don't generate system test files.
     config.generators.system_tests = nil
+
+    # libフォルダの読み込み設定
+    config.autoload_paths += %W(#{config.root}/lib)
   end
 end
