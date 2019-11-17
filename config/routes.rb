@@ -1,6 +1,5 @@
 # ユーザーのURLアクセスをどのコントローラーのどのアクションで待ち受けるか設定するファイル
 Rails.application.routes.draw do
-  devise_for :users
   # resources :entriesで以下のルーティングを生成している
   # entries   GET    /entries(.:format)                entries#index
   #           POST   /entries(.:format)                entries#create
@@ -19,6 +18,11 @@ Rails.application.routes.draw do
       end
     end
   end
+  devise_for :users, controllers: {
+    omniauth_callbacks: 'users/omniauth_callbacks'
+  }
+  get 'home/index'
+  root to: 'blogs#index'
 
   mount LetterOpenerWeb::Engine, at: '/letter_opener' if Rails.env.development?
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
