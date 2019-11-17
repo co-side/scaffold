@@ -16,12 +16,14 @@
     %tr
       %th Title
       %th Body
+      %th Genre
       %th{:colspan => "3"}
   %tbody
     - @blog.entries.each do |entry|
       %tr
         %td= entry.title
         %td= entry.body
+        %td= entry.genre_text
         %td= link_to 'Show', blog_entry_path(@blog, entry)
         %td= link_to 'Edit', edit_blog_entry_path(@blog, entry)
         %td= link_to 'Destroy', blog_entry_path(@blog, entry), method: :delete, data: { confirm: 'Are you sure?' }

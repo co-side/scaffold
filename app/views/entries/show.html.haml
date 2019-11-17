@@ -3,6 +3,7 @@
 %h2= @blog.title
 %h2= "Title: #{@entry.title}"
 %h2= "Body: #{@entry.body}"
+%h2= "Genre: #{@entry.genre_text}"
 
 = link_to 'Edit', edit_blog_entry_path(@blog, @entry)
 \|
